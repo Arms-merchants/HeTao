@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:gravity="center"
+    android:text="点击对应的日期，如果有餐饮信息那就会展示，如果没有会有对应的提示"
+    android:textColor="@color/black"
+    android:textSize="14sp" />
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@android:color/darker_gray" />
+  <!--周视图-->
+  <com.sy007.calendar.widget.WeekView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    app:wv_content="@array/week_sunday_to_saturday"
+    app:wv_text_color="#333333"
+    app:wv_text_size="13sp" />
+
+  <!--日历-->
+  <com.sy007.calendar.widget.CalendarView
+    android:id="@+id/cv_single_calendar_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+</LinearLayout>
