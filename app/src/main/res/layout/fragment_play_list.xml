@@ -6,10 +6,22 @@
   android:layout_height="match_parent"
   tools:context=".ui.main.MainActivity">
 
+  <include
+    android:id="@+id/tipView"
+    layout="@layout/layout_header_view"
+    android:visibility="gone" />
+
   <com.scwang.smartrefresh.layout.SmartRefreshLayout
     android:id="@+id/smartRefresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tipView">
+
+    <com.arm.hetao.view.MyHeaderView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/rv"
       android:layout_width="match_parent"

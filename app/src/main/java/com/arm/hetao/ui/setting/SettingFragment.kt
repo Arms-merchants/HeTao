@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.arm.hetao.BuildConfig
 import com.arm.hetao.databinding.FragmentSettingBinding
+import com.arm.hetao.ext.showSnackBar
 import com.arm.hetao.ui.base.BaseFragment
+import com.arm.hetao.utils.AppUpdateUtils
 import com.google.android.material.snackbar.Snackbar
 
 /**
@@ -43,6 +46,21 @@ class SettingFragment : BaseFragment() {
         viewModel.data.observe(viewLifecycleOwner) {
             dismissLoading()
             Snackbar.make(binding.root, "登录成功", Snackbar.LENGTH_LONG).show()
+        }
+        binding.tvVersion.text = "应用版本:${BuildConfig.VERSION_NAME}"
+        binding.llUpdate.setOnClickListener {
+            showLoading()
+            viewModel.checkVersion()
+        }
+        viewModel.version.observe(viewLifecycleOwner) {
+            dismissLoading()
+            it?.let {
+                if (it.buildVersionNo <= BuildConfig.VERSION_CODE) {
+                    "已经是最新版本".showSnackBar(binding.tvVersion)
+                    return@observe
+                }
+                AppUpdateUtils.handleUpdate(requireContext(), it)
+            }
         }
     }
 

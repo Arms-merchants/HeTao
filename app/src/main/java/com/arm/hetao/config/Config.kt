@@ -27,6 +27,9 @@ interface Config {
             //date=2023-07-26&ouId=551A7EAD59DFF6D9AE686694F17D4E20A58107181DF2FF0122B7C7FF7A649065&sid=-945-91-412411412249120-13-91118-886663104
             const val MENU_URL = "http://www.chenlongsoft.com:8091/rest/food/query/day/maa"
 
+
+            const val UPDATE_URL = "https://www.pgyer.com/apiv2/app/install?_api_key=285c614743cd04a463caa5f8f96ecf36&appKey=5b9642001395246f7d7626929599dc1a"
+
         }
     }
 

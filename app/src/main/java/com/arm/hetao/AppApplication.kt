@@ -3,6 +3,8 @@ package com.arm.hetao
 import android.app.Application
 import cn.leancloud.LeanCloud
 import com.arm.hetao.utils.KVUtils
+import com.arm.hetao.view.MyHeaderView
+import com.scwang.smartrefresh.layout.SmartRefreshLayout
 
 /**
  *    author : heyueyang

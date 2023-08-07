@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "hetao"
 include ':app'
+include ':library'

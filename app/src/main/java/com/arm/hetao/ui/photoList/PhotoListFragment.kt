@@ -29,5 +29,4 @@ class PhotoListFragment : BaseFragment() {
         return binding.root
     }
 
-
 }

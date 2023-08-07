@@ -3,6 +3,7 @@ package com.arm.hetao.request
 import com.arm.hetao.bean.BaseResponseBean
 import com.arm.hetao.bean.DataContent
 import com.arm.hetao.bean.MenuListBean
+import com.arm.hetao.bean.VersionBean
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -45,11 +46,17 @@ interface Api {
     @FormUrlEncoded
     @POST("http://www.chenlongsoft.com:8091/rest/food/query/day/maa")
     fun getMenuList(
-        @Field("date")date:String,
-        @Field("ouId")ouId:String,
-        @Field("sid")sid:String,
+        @Field("date") date: String,
+        @Field("ouId") ouId: String,
+        @Field("sid") sid: String,
 
-    ):Call<BaseResponseBean<List<MenuListBean>>>
+        ): Call<BaseResponseBean<List<MenuListBean>>>
 
+    @FormUrlEncoded
+    @POST("https://www.pgyer.com/apiv2/app/check")
+    fun getNewVersion(
+        @Field("_api_key") _api_key: String,
+        @Field("appKey") appKey: String
+    ): Call<BaseResponseBean<VersionBean>>
 
 }

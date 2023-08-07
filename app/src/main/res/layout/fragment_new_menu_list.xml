@@ -8,6 +8,11 @@
     android:id="@+id/smartRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <com.arm.hetao.view.MyHeaderView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/rv"
       android:layout_width="match_parent"

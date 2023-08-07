@@ -25,10 +25,10 @@ class NewMenuListModel : ViewModel() {
     private var currentDate = TimeUtils.getNowTimeString("yyyy-MM-dd")
 
     fun getData(isCurrentDate: Boolean = false) {
-        if (isCurrentDate) {
-            currentDate = TimeUtils.getNowTimeString("yyyy-MM-dd")
+        currentDate = if (isCurrentDate) {
+            TimeUtils.getNowTimeString("yyyy-MM-dd")
         } else {
-            currentDate = TimeUtils.getPreviousDay(currentDate, -20) ?: ""
+            TimeUtils.getPreviousDay(currentDate, -20) ?: ""
         }
         viewModelScope.launch {
             _data.postValue(required.getMenuList2(currentDate))

@@ -128,4 +128,6 @@
         <item>父亲节</item>
         <item>感恩节</item>
     </string-array>
+
+    <string name="update_title" translatable="false">应用更新</string>
 </resources>

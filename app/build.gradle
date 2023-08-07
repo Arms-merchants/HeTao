@@ -12,8 +12,8 @@ android {
         applicationId "com.arm.hetao"
         minSdk 23
         targetSdk 33
-        versionCode 3
-        versionName "2.0"
+        versionCode 7
+        versionName "2.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -69,6 +69,7 @@ dependencies {
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
 
     implementation 'com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer:v8.4.0-release-jitpack'
 
@@ -89,4 +90,21 @@ dependencies {
 
     implementation("io.coil-kt:coil:2.2.2")
     implementation 'io.github.sy007:calendar-view:1.2.1'
+
+    implementation 'com.github.getActivity:XXPermissions:18.2'
+    implementation project(':library')
+    implementation 'com.github.fengzhizi715:saf-logginginterceptor:v1.6.13'
+
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+
+    def paging_version = "3.1.1"
+
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    // alternatively - without Android dependencies for tests
+    testImplementation "androidx.paging:paging-common-ktx:$paging_version"
+
+    implementation 'com.airbnb.android:lottie:6.1.0'
+
+
 }

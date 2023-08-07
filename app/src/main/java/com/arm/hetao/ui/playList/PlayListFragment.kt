@@ -66,7 +66,6 @@ class PlayListFragment : BaseFragment() {
         }
         binding.smartRefresh.setEnableLoadMore(false)
         binding.smartRefresh.setOnRefreshListener {
-            Log.e("TAG", "smartRefresh")
             model.getData()
         }
         model.getData()

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arm.hetao.bean.UserInfoBean
+import com.arm.hetao.bean.VersionBean
 import com.arm.hetao.request.Require
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,6 +24,7 @@ class SettingModel : ViewModel() {
 
     private val _data = MutableLiveData<UserInfoBean?>()
     val data: LiveData<UserInfoBean?> = _data
+    val version = MutableLiveData<VersionBean?>()
 
     fun login(phone: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -30,4 +32,11 @@ class SettingModel : ViewModel() {
             _data.postValue(userInfoBean)
         }
     }
+
+    fun checkVersion() {
+        viewModelScope.launch(Dispatchers.IO) {
+            version.postValue(required.getNewVersion())
+        }
+    }
+
 }

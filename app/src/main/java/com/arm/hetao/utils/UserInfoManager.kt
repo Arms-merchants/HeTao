@@ -12,13 +12,13 @@ import com.arm.hetao.bean.UserInfoBean
 object UserInfoManager {
 
     fun getUserInfoBean(): UserInfoBean? {
-        val json = MMKVKv.instance.getString("UserInfoBean") ?: return null
+        val json = KVUtils.getKvManger().getString("UserInfoBean") ?: return null
         Log.e("TAG", "getUserInfoBean$json")
         return fromJsonToAnyByMoshi<UserInfoBean>(json)
     }
 
     fun saveUserInfoBean(userInfoBean: UserInfoBean) {
         val json = toJsonByMoshi(userInfoBean)
-        MMKVKv.instance.putString("UserInfoBean", json)
+        KVUtils.getKvManger().putString("UserInfoBean", json)
     }
 }

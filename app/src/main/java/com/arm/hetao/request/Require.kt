@@ -12,22 +12,27 @@ import com.arm.hetao.bean.MenuListAdapterBean
 import com.arm.hetao.bean.MenuListBean
 import com.arm.hetao.bean.MenuListItemBean
 import com.arm.hetao.bean.UserInfoBean
+import com.arm.hetao.bean.VersionBean
 import com.arm.hetao.bean.VideoListBean
 import com.arm.hetao.config.Config
 import com.arm.hetao.utils.TimeUtils
 import com.arm.hetao.utils.UserInfoManager
 import com.arm.hetao.utils.fromJsonToAnyByMoshi
 import com.arm.hetao.utils.fromJsonToListByMoshi
+import com.safframework.http.interceptor.AndroidLoggingInterceptor
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 
 /**
@@ -54,9 +59,16 @@ class Require {
 
     private fun getRetrofit(): Retrofit {
         if (retrofitInstance == null) {
+            val httpClient = OkHttpClient.Builder()
+            httpClient.addInterceptor(AndroidLoggingInterceptor.build())
+            val moshi = Moshi.Builder()
+                .addLast(KotlinJsonAdapterFactory())
+                .build()
+
             retrofitInstance = Retrofit.Builder()
                 .baseUrl("http://www.chenlongsoft.com:8091")
-                .addConverterFactory(GsonConverterFactory.create())
+                .client(httpClient.build())
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build()
         }
         return retrofitInstance!!
@@ -84,7 +96,7 @@ class Require {
         }
         if ("EXCEPTION" == body.dataType) {
             //这里就说明账号信息失效，需要重新请求用户信息
-            getUserInfo(true)
+            getUserInfo(true, data)
             return
         }
         if (body.dataContent?.length!! > 2) {
@@ -100,15 +112,24 @@ class Require {
         }
     }
 
-    suspend fun getUserInfo(isException: Boolean = false): UserInfoBean? {
-        Log.e("TAG", "获取用户数据")
+    suspend fun getUserInfo(
+        isException: Boolean = false,
+        data: MutableLiveData<ArrayList<Pair<String, String>>>? = null
+    ): UserInfoBean? {
         var tempUserInfo = getUserInfoFromBmob()
         if (tempUserInfo == null || isException) {
-            Log.e("TAG", "Bmob的数据为空，做登录请求")
+            if (tempUserInfo == null) {
+                Log.e("TAG", "从后端云没有获取到数据")
+            } else {
+                Log.e("TAG", "用户数据过期")
+            }
             tempUserInfo = getUserInfo4Http()
         }
         if (tempUserInfo != null) {
             UserInfoManager.saveUserInfoBean(tempUserInfo)
+        }
+        if (tempUserInfo != null && isException && data != null) {
+            getChannel(data)
         }
         return tempUserInfo
     }
@@ -195,7 +216,7 @@ class Require {
                     Log.e("TAG", "获取到的数据为空")
                     it.resume(null, null)
                 } else {
-                    Log.e("TAG", "返回的数据不为空")
+                    Log.e("TAG", "返回的用户数据数据不为空")
                     it.resume(
                         UserInfoBean(
                             lcObject.getString("gc_id"),
@@ -247,9 +268,12 @@ class Require {
                                     videoUrl =
                                         Config.Http.BASE_VIDEO_ULR + dataContent.circle_resource[0].resouce_url
                                 }
+                                val time = dataContent.exchange_sendtime?.let { sendTime ->
+                                    TimeUtils.getFriendlyTimeSpanByNow(sendTime)
+                                } ?: ""
                                 val item = VideoListBean(
-                                    content = dataContent.exchange_content,
-                                    time = TimeUtils.getFriendlyTimeSpanByNow(dataContent.exchange_sendtime),
+                                    content = dataContent.exchange_content ?: "",
+                                    time = time,
                                     coverUrl = coverUrl,
                                     videoUrl = videoUrl
                                 )
@@ -332,4 +356,37 @@ class Require {
         }
         return list
     }
+
+    suspend fun getNewVersion(): VersionBean? {
+        return suspendCancellableCoroutine {
+            getRetrofit().create(Api::class.java)
+                .getNewVersion(
+                    "285c614743cd04a463caa5f8f96ecf36",
+                    "5b9642001395246f7d7626929599dc1a"
+                )
+                .enqueue(object : Callback<BaseResponseBean<VersionBean>> {
+                    override fun onResponse(
+                        call: Call<BaseResponseBean<VersionBean>>,
+                        response: Response<BaseResponseBean<VersionBean>>
+                    ) {
+                        if (response.isSuccessful && response.body() != null) {
+                            it.resume(response.body()!!.data, null)
+                        } else {
+                            it.resume(null, null)
+                        }
+                    }
+
+                    override fun onFailure(
+                        call: Call<BaseResponseBean<VersionBean>>,
+                        t: Throwable
+                    ) {
+                        t.printStackTrace()
+                        it.resume(null, null)
+                    }
+
+                })
+        }
+    }
+
+
 }

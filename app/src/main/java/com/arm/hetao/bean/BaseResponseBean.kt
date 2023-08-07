@@ -5,5 +5,8 @@ package com.arm.hetao.bean
  */
 data class BaseResponseBean<T>(
     val dataContent: T?,
-    val dataType: String
+    val dataType: String?,
+    val code: Int? = 0,
+    val message: String? = "",
+    val data: T? = null
 )

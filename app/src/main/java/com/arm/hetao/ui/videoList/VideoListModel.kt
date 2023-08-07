@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.arm.hetao.bean.VideoListBean
 import com.arm.hetao.request.Require
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +23,11 @@ class VideoListModel : ViewModel() {
         Require()
     }
 
-    private var page = 0
+    val flow = Pager(PagingConfig(pageSize = 10)) {
+        VideoPageSource(require)
+    }.flow.cachedIn(viewModelScope)
+
+    var page = 0
     private val _data = MutableLiveData<MutableList<VideoListBean>?>()
     val data: LiveData<MutableList<VideoListBean>?> = _data
 
