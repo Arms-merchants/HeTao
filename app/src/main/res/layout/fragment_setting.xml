@@ -11,7 +11,7 @@
     android:layout_marginStart="20dp"
     android:layout_marginTop="20dp"
     android:text="设置"
-    android:textColor="@color/black"
+    android:textColor="@color/text_color"
     android:textSize="20sp"
     android:textStyle="bold"
     app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +25,7 @@
     android:layout_marginTop="10dp"
     android:layout_marginEnd="20dp"
     android:hint="手机号"
+    android:textColor="@color/text_color"
     app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
   <EditText
@@ -35,6 +36,7 @@
     android:layout_marginTop="10dp"
     android:layout_marginEnd="20dp"
     android:hint="密码"
+    android:textColor="@color/text_color"
     app:layout_constraintTop_toBottomOf="@id/etPhone" />
 
   <TextView
@@ -44,7 +46,7 @@
     android:layout_marginTop="10dp"
     android:padding="10dp"
     android:text="登录"
-    android:textColor="@color/black"
+    android:textColor="@color/text_color"
     android:textSize="17sp"
     app:layout_constraintEnd_toEndOf="@id/etPassword"
     app:layout_constraintTop_toBottomOf="@id/etPassword" />
@@ -55,6 +57,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="20dp"
     android:text="该功能请联系管理员操作，也就是我（何月阳）"
+    android:textColor="@color/text_color"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tvLogin" />
@@ -81,12 +84,12 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="10dp"
       android:text="检查更新"
+      android:textColor="@color/text_color"
       android:textSize="18sp"
       app:layout_constraintBottom_toBottomOf="@id/ivUpdate"
       app:layout_constraintStart_toEndOf="@id/ivUpdate"
       app:layout_constraintTop_toTopOf="@id/ivUpdate" />
   </LinearLayout>
-
 
   <TextView
     android:id="@+id/tvVersion"
@@ -94,11 +97,10 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="20dp"
-    android:textColor="@color/black"
+    android:textColor="@color/text_color"
     android:textSize="16sp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

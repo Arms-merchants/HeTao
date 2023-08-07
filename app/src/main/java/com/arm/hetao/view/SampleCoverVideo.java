@@ -1,4 +1,4 @@
-package com.arm.hetao;
+package com.arm.hetao.view;
 
 import android.content.Context;
 import android.graphics.Point;
@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
+import com.arm.hetao.R;
 import com.shuyu.gsyvideoplayer.utils.CommonUtil;
 import com.shuyu.gsyvideoplayer.utils.Debuger;
 import com.shuyu.gsyvideoplayer.utils.GSYVideoType;

@@ -3,7 +3,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-  <com.arm.hetao.SampleCoverVideo
+  <com.arm.hetao.view.SampleCoverVideo
     android:id="@+id/video_item_player"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />

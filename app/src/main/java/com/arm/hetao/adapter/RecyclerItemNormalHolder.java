@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import com.arm.hetao.R;
-import com.arm.hetao.SampleCoverVideo;
+import com.arm.hetao.view.SampleCoverVideo;
 import com.arm.hetao.bean.ViewPageItemBean;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;

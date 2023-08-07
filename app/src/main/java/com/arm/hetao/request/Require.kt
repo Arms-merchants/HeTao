@@ -350,7 +350,13 @@ class Require {
                         sb.append(it.cbName + "\n")
                         urls.add(it.cbImg)
                     }
-                    list.add(MenuListAdapterBean(date, MenuListItemBean(sb.toString(), urls)))
+                    val week = TimeUtils.getWeek(date, "yyyy-MM-dd")
+                    list.add(
+                        MenuListAdapterBean(
+                            "$date $week",
+                            MenuListItemBean(sb.toString(), urls)
+                        )
+                    )
                 }
             }
         }
