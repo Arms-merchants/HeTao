@@ -1,0 +1,32 @@
+
+plugins{
+    id("com.android.library")
+}
+
+
+/**
+ *  修改至这个库
+ *  implementation 'com.github.NewHuLe:AppUpdate:v1.7'
+ */
+android {
+    compileSdkVersion 33
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 33
+    }
+
+    buildTypes {
+        release {
+            // library混淆，无需在主module混淆
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+}

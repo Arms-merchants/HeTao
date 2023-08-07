@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="common_text_strong">@color/color_398DFF</color>
+    <!--app下载更新-->
+    <color name="updateColor">#FF4081</color>
+    <color name="color_blue">#4F97EF</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_FF7F2D">#FF7F2D</color>
+    <color name="color_398DFF">#398DFF</color>
+    <color name="color_E3E4ED">#E3E4ED</color>
+    <color name="color_999999">#999999</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="color_DDDDDD">#DDDDDD</color>
+    <color name="color_3D7EFF">#3D7EFF</color>
+</resources>
