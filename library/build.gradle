@@ -21,6 +21,7 @@ android {
             consumerProguardFiles 'proguard-rules.pro'
         }
     }
+    namespace 'com.open.hule.library'
 }
 
 dependencies {

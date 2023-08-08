@@ -60,7 +60,7 @@ class Require {
     private fun getRetrofit(): Retrofit {
         if (retrofitInstance == null) {
             val httpClient = OkHttpClient.Builder()
-            httpClient.addInterceptor(AndroidLoggingInterceptor.build())
+            httpClient.addInterceptor(AndroidLoggingInterceptor.build(hideVerticalLine = true))
             val moshi = Moshi.Builder()
                 .addLast(KotlinJsonAdapterFactory())
                 .build()
